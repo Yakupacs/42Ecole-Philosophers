@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yacis@student.42istanbul.com.tr <yacis>    +#+  +:+       +#+        */
+/*   By: yacis <yacis@student.42istanbul.com.tr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 17:22:44 by yacis@stude       #+#    #+#             */
-/*   Updated: 2022/10/24 20:14:00 by yacis@stude      ###   ########.fr       */
+/*   Updated: 2022/10/27 21:18:59 by yacis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,19 @@ void	ft_init_mutex(t_philo *philo, char **av, pthread_mutex_t *forks,
 		i++;
 	}
 	pthread_mutex_init(philo->death, NULL);
+}
+
+void	ft_join_thread(t_philo *philo, char **av)
+{
+	int	i;
+
+	i = 0;
+	while (i < ft_atoi(av[1]))
+	{
+		pthread_create(&philo, NULL, &ft_dinner, &philo[i]);
+		i++;
+		usleep(100);
+	}
+	while (*philo->is_dead != 1)
+		ft_check_death(philo);
 }

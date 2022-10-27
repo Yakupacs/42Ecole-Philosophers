@@ -1,6 +1,8 @@
 NAME = philo
 
-SRCS = main.c ft_atoi.c ft_args.c ft_init.c ft_time.c
+SRCS = main.c ft_atoi.c ft_args.c ft_init.c ft_time.c \
+		ft_dinner.c ft_status.c ft_free.c
+
 
 CC = gcc
 

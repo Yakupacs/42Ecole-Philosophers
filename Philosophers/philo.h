@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yacis@student.42istanbul.com.tr <yacis>    +#+  +:+       +#+        */
+/*   By: yacis <yacis@student.42istanbul.com.tr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/24 20:13:41 by yacis@stude       #+#    #+#             */
-/*   Updated: 2022/10/24 20:13:42 by yacis@stude      ###   ########.fr       */
+/*   Created: 2022/10/25 16:50:07 by yacis             #+#    #+#             */
+/*   Updated: 2022/10/27 21:24:46 by yacis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,18 @@ typedef struct s_philo{
 void	ft_args_control(int ac, char **av);
 void	ft_args_check_number(int ac, char **av);
 void	ft_args_count(int ac);
-int		ft_atoi(const char *str);
+long	ft_atoi(const char *str);
 void	ft_init_philos(t_philo *philo, int ac, char **av);
 void	ft_init_mutex(t_philo *philo, char **av, pthread_mutex_t *forks,
 			pthread_mutex_t *death);
+void	ft_join_thread(t_philo *philo, char **av);
 t_time	ft_get_time(void);
 void	ft_sleep(int wait_time);
+void	*ft_dinner(void *args);
+int		ft_print_status(t_philo *philo, char *status);
+int		ft_finish_serving(t_philo *philo, int *j, int *result);
+void	ft_check_dead(t_philo *philo);
+int		ft_dead(t_philo *philo, int i, t_time time);
+void	ft_free(t_philo *philo, pthread_mutex_t *forks, pthread_mutex_t *death);
 
 #endif

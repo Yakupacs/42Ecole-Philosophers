@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yacis@student.42istanbul.com.tr <yacis>    +#+  +:+       +#+        */
+/*   By: yacis <yacis@student.42istanbul.com.tr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 16:23:51 by yacis@stude       #+#    #+#             */
-/*   Updated: 2022/10/24 21:50:06 by yacis@stude      ###   ########.fr       */
+/*   Updated: 2022/10/27 21:18:56 by yacis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 // av[2] -> die time
 // av[3] -> eat time
 // av[4] -> sleep time
+// av[5] -> must eat
 
 int	main(int ac, char **av)
 {
@@ -31,4 +32,6 @@ int	main(int ac, char **av)
 	death = malloc(sizeof(pthread_mutex_t));
 	ft_init_philos(philo, ac, av);
 	ft_init_mutex(philo, av, forks, death);
+	ft_join_thread(philo, av);
+
 }
