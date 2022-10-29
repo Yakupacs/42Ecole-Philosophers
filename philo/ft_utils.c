@@ -1,16 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
+/*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yacis <yacis@student.42istanbul.com.tr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 21:19:20 by yacis             #+#    #+#             */
-/*   Updated: 2022/10/27 21:19:33 by yacis            ###   ########.fr       */
+/*   Created: 2022/10/29 07:25:50 by yacis             #+#    #+#             */
+/*   Updated: 2022/10/29 07:25:50 by yacis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	ft_sleep(int wait_time)
+{
+	t_time	time;
+
+	time = ft_get_time();
+	while (ft_get_time() - time < (t_time)wait_time)
+		usleep(100);
+}
+
+t_time	ft_get_time(void)
+{
+	struct timeval		tv;
+	t_time				time;
+
+	gettimeofday(&tv, NULL);
+	time = tv.tv_sec * 1000 + tv.tv_usec / 1000;
+	return (time);
+}
 
 void	ft_free(t_philo *philo, pthread_mutex_t *forks, pthread_mutex_t *death)
 {
@@ -27,4 +46,31 @@ void	ft_free(t_philo *philo, pthread_mutex_t *forks, pthread_mutex_t *death)
 	free(forks);
 	free(death);
 	free(philo);
+}
+
+
+long	ft_atol(const char *str)
+{
+	int		i;
+	long	nb;
+	int		sign;
+
+	i = 0;
+	nb = 0;
+	sign = 1;
+	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n' || str[i] == '\v'
+		|| str[i] == '\f' || str[i] == '\r')
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			sign = -1;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		nb = nb * 10 + str[i] - '0';
+		i++;
+	}
+	return (nb * sign);
 }

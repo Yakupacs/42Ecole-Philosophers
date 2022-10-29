@@ -5,18 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yacis <yacis@student.42istanbul.com.tr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/26 20:34:14 by yacis             #+#    #+#             */
-/*   Updated: 2022/10/26 20:48:10 by yacis            ###   ########.fr       */
+/*   Created: 2022/10/29 07:25:31 by yacis             #+#    #+#             */
+/*   Updated: 2022/10/29 07:25:31 by yacis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-int	ft_lonely_dinner(t_philo *philo)
-{
-	ft_sleep(philo->time_to_die);
-	return (1);
-}
 
 int	ft_eat(t_philo *philo)
 {
@@ -27,8 +21,10 @@ int	ft_eat(t_philo *philo)
 		return (1);
 	}
 	if (philo->philo_num == 1)
-		if (ft_lonely_dinner(philo))
-			return (1);
+	{
+		ft_sleep(philo->time_to_die);
+		return (1);
+	}
 	pthread_mutex_lock(philo->right_fork_mutex);
 	if (ft_print_status(philo, "has taken a fork"))
 	{
@@ -72,11 +68,11 @@ void	*ft_dinner(void *args)
 	while (1)
 	{
 		if (ft_eat(philo))
-			break;
+			break ;
 		if (ft_sleep_philos(philo))
-			break;
+			break ;
 		if (ft_print_status(philo, "is thinking"))
-			break;
+			break ;
 	}
 	return (NULL);
 }

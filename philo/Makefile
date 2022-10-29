@@ -1,14 +1,12 @@
 NAME = philo
 
-SRCS = main.c ft_atoi.c ft_args.c ft_init.c ft_time.c \
-		ft_dinner.c ft_status.c ft_free.c
-
+SRCS =  ft_philo.c ft_status.c ft_dinner.c ft_utils.c
 
 CC = gcc
 
 CFLAGS = -Wall -Werror -Wextra -g -pthread
 
-FLAGS_DATARACE = -fsanitize = thread -g
+FLAGS_DATARACE = -fsanitize=thread -g
 
 all: $(NAME)
 
