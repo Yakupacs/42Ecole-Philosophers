@@ -1,6 +1,6 @@
 NAME = philo
 
-SRCS =  ft_philo.c ft_status.c ft_dinner.c ft_utils.c
+SRCS = main.c status.c dinner.c utils.c
 
 CC = gcc
 

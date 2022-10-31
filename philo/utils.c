@@ -1,53 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utils.c                                         :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yacis <yacis@student.42istanbul.com.tr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/29 07:25:50 by yacis             #+#    #+#             */
-/*   Updated: 2022/10/29 07:25:50 by yacis            ###   ########.fr       */
+/*   Created: 2022/10/29 17:12:48 by yacis             #+#    #+#             */
+/*   Updated: 2022/10/29 17:15:16 by yacis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_sleep(int wait_time)
-{
-	t_time	time;
-
-	time = ft_get_time();
-	while (ft_get_time() - time < (t_time)wait_time)
-		usleep(100);
-}
-
-t_time	ft_get_time(void)
-{
-	struct timeval		tv;
-	t_time				time;
-
-	gettimeofday(&tv, NULL);
-	time = tv.tv_sec * 1000 + tv.tv_usec / 1000;
-	return (time);
-}
-
-void	ft_free(t_philo *philo, pthread_mutex_t *forks, pthread_mutex_t *death)
+int	ft_check_args(int argc, char **argv)
 {
 	int	i;
+	int	j;
 
-	i = 0;
-	while (i < philo->philo_num)
+	i = 1;
+	while (i < argc)
 	{
-		pthread_mutex_destroy(philo[i].left_fork_mutex);
-		pthread_mutex_destroy(philo[i].right_fork_mutex);
+		j = 0;
+		while (argv[i][j])
+		{
+			if (argv[i][j] < '0' || argv[i][j] > '9')
+				return (0);
+			j++;
+		}
 		i++;
 	}
-	pthread_mutex_destroy(philo->death);
-	free(forks);
-	free(death);
-	free(philo);
+	return (1);
 }
-
 
 long	ft_atol(const char *str)
 {
@@ -73,4 +56,40 @@ long	ft_atol(const char *str)
 		i++;
 	}
 	return (nb * sign);
+}
+
+void	ft_sleep(int wait_time)
+{
+	t_time	time;
+
+	time = ft_get_time();
+	while (ft_get_time() - time < (t_time)wait_time)
+		usleep(100);
+}
+
+t_time	ft_get_time(void)
+{
+	struct timeval		tv;
+	t_time				time;
+
+	gettimeofday(&tv, NULL);
+	time = tv.tv_sec * 1000 + tv.tv_usec / 1000;
+	return (time);
+}
+
+void	ft_free(t_philo *philo, pthread_mutex_t *forks, pthread_mutex_t *death)
+{
+	int	i;
+
+	i = 0;
+	while (i < philo->philo_nb)
+	{
+		pthread_mutex_destroy(philo[i].left_fork_mutex);
+		pthread_mutex_destroy(philo[i].right_fork_mutex);
+		i++;
+	}
+	pthread_mutex_destroy(philo->death);
+	free(forks);
+	free(death);
+	free(philo);
 }

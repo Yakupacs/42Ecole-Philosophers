@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_status.c                                        :+:      :+:    :+:   */
+/*   status.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yacis <yacis@student.42istanbul.com.tr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/29 07:25:39 by yacis             #+#    #+#             */
-/*   Updated: 2022/10/29 07:25:39 by yacis            ###   ########.fr       */
+/*   Created: 2022/10/28 17:51:43 by yacis             #+#    #+#             */
+/*   Updated: 2022/10/29 18:50:39 by yacis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int	ft_finish_serving(t_philo *philo, int *j, int *result)
 {
 	if (philo->must_eat != -1)
 	{
-		while (*j < philo->philo_num)
-			*result += philo[(*j)++].meals_eaten;
-		if (*result == philo->philo_num * philo->must_eat)
+		while (*j < philo->philo_nb)
+			*result += philo[(*j)++].total_eaten;
+		if (*result == philo->philo_nb * philo->must_eat)
 		{
 			*philo->is_dead = 1;
 			return (1);
@@ -48,7 +48,7 @@ void	ft_check_death(t_philo *philo)
 	i = 0;
 	j = 0;
 	result = 0;
-	while (i < philo->philo_num)
+	while (i < philo->philo_nb)
 	{
 		pthread_mutex_lock(philo->death);
 		time = ft_get_time() - philo[i].last_meal;

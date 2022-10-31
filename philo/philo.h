@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yacis <yacis@student.42istanbul.com.tr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/29 07:25:59 by yacis             #+#    #+#             */
-/*   Updated: 2022/10/29 07:25:59 by yacis            ###   ########.fr       */
+/*   Created: 2022/10/28 17:52:00 by yacis             #+#    #+#             */
+/*   Updated: 2022/10/29 18:50:13 by yacis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,11 @@ typedef unsigned long long	t_time;
 typedef struct s_philo
 {
 	int				id;
-	int				philo_num;
+	int				philo_nb;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				must_eat;
-	int				meals_eaten;
 	int				total_eaten;
 	int				*is_dead;
 	t_time			last_meal;
